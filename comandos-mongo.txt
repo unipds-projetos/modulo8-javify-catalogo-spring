@@ -1,0 +1,90 @@
+$ docker compose up -d
+[+] Running 1/1
+ ✔ Container javify-mongodb  Started
+
+$ docker exec -it javify-mongodb mongosh -u admin -p adminpassword
+
+Current Mongosh Log ID: 6a21e3995003ecb28cd1a7ba
+Connecting to:          mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.3
+Using MongoDB:          8.2.9
+Using Mongosh:          2.8.3
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2026-06-04T20:24:14.943+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2026-06-04T20:24:15.202+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+   2026-06-04T20:24:15.202+00:00: We suggest setting the contents of sysfsFile to 0.
+   2026-06-04T20:24:15.202+00:00: We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.
+------
+
+test> use javify_db;
+switched to db javify_db
+
+javify_db> db.albuns.insertOne({
+|   "titulo": "Dark Side of the Moon",
+|   "ano_lancamento": 1973,
+|   "genero": "Progressive Rock",
+|   "artistas": [
+|     { "nome": "Pink Floyd", "funcao": "Banda Principal" }
+|   ],
+|   "faixas": [
+|     { "numero": 1, "titulo": "Speak to Me", "duracao_segundos": 65 },
+|     { "numero": 2, "titulo": "Breathe", "duracao_segundos": 163 }
+|   ]
+| });
+|
+{
+  acknowledged: true,
+  insertedId: ObjectId('6a21e39d5003ecb28cd1a7bb')
+}
+
+javify_db> db.albuns.find()
+[
+  {
+    _id: ObjectId('6a21e39d5003ecb28cd1a7bb'),
+    titulo: 'Dark Side of the Moon',
+    ano_lancamento: 1973,
+    genero: 'Progressive Rock',
+    artistas: [ { nome: 'Pink Floyd', funcao: 'Banda Principal' } ],
+    faixas: [
+      { numero: 1, titulo: 'Speak to Me', duracao_segundos: 65 },
+      { numero: 2, titulo: 'Breathe', duracao_segundos: 163 }
+    ]
+  }
+]
+
+javify_db> db.albuns.find({ "titulo": "Dark Side of the Moon" });
+|
+[
+  {
+    _id: ObjectId('6a21e39d5003ecb28cd1a7bb'),
+    titulo: 'Dark Side of the Moon',
+    ano_lancamento: 1973,
+    genero: 'Progressive Rock',
+    artistas: [ { nome: 'Pink Floyd', funcao: 'Banda Principal' } ],
+    faixas: [
+      { numero: 1, titulo: 'Speak to Me', duracao_segundos: 65 },
+      { numero: 2, titulo: 'Breathe', duracao_segundos: 163 }
+    ]
+  }
+]
+
+javify_db> db.albuns.find({ "artistas.nome": "Pink Floyd" });
+|
+[
+  {
+    _id: ObjectId('6a21e39d5003ecb28cd1a7bb'),
+    titulo: 'Dark Side of the Moon',
+    ano_lancamento: 1973,
+    genero: 'Progressive Rock',
+    artistas: [ { nome: 'Pink Floyd', funcao: 'Banda Principal' } ],
+    faixas: [
+      { numero: 1, titulo: 'Speak to Me', duracao_segundos: 65 },
+      { numero: 2, titulo: 'Breathe', duracao_segundos: 163 }
+    ]
+  }
+]
+
+javify_db>
