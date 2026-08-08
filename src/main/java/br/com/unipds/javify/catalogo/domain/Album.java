@@ -4,9 +4,14 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
+@Document(collection = "albuns")
 public record Album (
+                     @Id String id,
                      @NotBlank(message = "O título do álbum é obrigatório e não pode estar em branco.")
                      String titulo,
 
