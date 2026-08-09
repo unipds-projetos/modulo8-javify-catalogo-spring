@@ -2,6 +2,10 @@ package br.com.unipds.javify.catalogo.controller;
 
 import br.com.unipds.javify.catalogo.domain.Album;
 import br.com.unipds.javify.catalogo.service.AlbumService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +23,13 @@ public class AlbumController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Album>> listaTodos(@RequestParam(required = false) String titulo) {
+    public ResponseEntity<Page<Album>> listaTodos(@RequestParam(required = false) String titulo,
+                                                  @PageableDefault(size = 5, page = 0,
+                                                          sort = "anoLancamento", direction = Sort.Direction.DESC) Pageable pageable) {
         if (StringUtils.hasText(titulo)) {
-            return ResponseEntity.ok(albumService.buscaPorTitulo(titulo));
+            return ResponseEntity.ok(albumService.buscaPorTitulo(titulo, pageable));
         }
-        return ResponseEntity.ok(albumService.listarTodos());
+        return ResponseEntity.ok(albumService.listarTodos(pageable));
     }
 
     @GetMapping("/{id}")

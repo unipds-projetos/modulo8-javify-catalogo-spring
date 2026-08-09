@@ -3,6 +3,8 @@ package br.com.unipds.javify.catalogo.service;
 import br.com.unipds.javify.catalogo.domain.Album;
 import br.com.unipds.javify.catalogo.exception.AlbumNaoEncontradoException;
 import br.com.unipds.javify.catalogo.repository.AlbumRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +18,12 @@ public class AlbumService {
         this.albumRepository = albumRepository;
     }
 
-    public List<Album> listarTodos() {
-        return albumRepository.findAll();
+    public Page<Album> listarTodos(Pageable pageable) {
+        return albumRepository.findAll(pageable);
     }
 
-    public List<Album> buscaPorTitulo(String titulo) {
-        throw new UnsupportedOperationException("TODO");
+    public Page<Album> buscaPorTitulo(String titulo, Pageable pageable) {
+        return albumRepository.findByTituloContainingIgnoreCase(titulo, pageable);
     }
 
     public Album buscarPorId(String id) {

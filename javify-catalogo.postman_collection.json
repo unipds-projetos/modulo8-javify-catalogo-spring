@@ -29,12 +29,39 @@
       "response": []
     },
     {
+      "name": "Busca por Titulo",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/v1/albuns?titulo=dark",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "v1",
+            "albuns"
+          ],
+          "query": [
+            {
+              "key": "titulo",
+              "value": "dark"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Detalha Album",
       "request": {
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8082/api/v1/albuns/6a2c1f2d239cfa7cdccbdc67",
+          "raw": "http://localhost:8082/api/v1/albuns/6a77b36d27d250b22bd1a7bb",
           "protocol": "http",
           "host": [
             "localhost"
@@ -44,7 +71,7 @@
             "api",
             "v1",
             "albuns",
-            "6a2c1f2d239cfa7cdccbdc67"
+            "6a77b36d27d250b22bd1a7bb"
           ]
         }
       },
@@ -57,7 +84,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"titulo\": \"Abbey Road\",\n  \"anoLancamento\": 1969,\n  \"genero\": \"Classic Rock\",\n  \"artistas\": [\n    {\n      \"nome\": \"The Beatles\",\n      \"funcao\": \"Banda\"\n    }\n  ],\n  \"faixas\": [\n    {\n      \"numero\": 1,\n      \"titulo\": \"Come Together\",\n      \"duracaoSegundos\": 259\n    },\n    {\n      \"numero\": 2,\n      \"titulo\": \"Something\",\n      \"duracaoSegundos\": 182\n    }\n  ]\n}",
+          "raw": "{\n  \"titulo\": \"Abbey Road\",\n  \"anoLancamento\": 1969,\n  \"genero\": \"Classic Rock\",\n  \"artistas\": [\n    {\n      \"nome\": \"The Beatles\",\n      \"funcao\": \"Banda Principal\"\n    }\n  ],\n  \"faixas\": [\n    {\n      \"numero\": 1,\n      \"titulo\": \"Come Together\",\n      \"duracaoSegundos\": 259\n    },\n    {\n      \"numero\": 2,\n      \"titulo\": \"Something\",\n      \"duracaoSegundos\": 182\n    }\n  ]\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -87,7 +114,7 @@
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "http://localhost:8082/api/v1/admin/albuns/6a2c1d31dd3aa71afad1bb26",
+          "raw": "http://localhost:8082/api/v1/admin/albuns/6a77bb2650a0c3ec96fcfc5f",
           "protocol": "http",
           "host": [
             "localhost"
@@ -98,7 +125,7 @@
             "v1",
             "admin",
             "albuns",
-            "6a2c1d31dd3aa71afad1bb26"
+            "6a77bb2650a0c3ec96fcfc5f"
           ]
         }
       },
@@ -111,7 +138,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"id\": \"6a2c1f2d239cfa7cdccbdc67\",\n    \"titulo\": \"Abbey Road\",\n    \"anoLancamento\": 1969,\n    \"genero\": \"Classic Rock\",\n    \"artistas\": [\n        {\n            \"nome\": \"Ringo Star\",\n            \"funcao\": \"baterista\"\n        },\n        {\n            \"nome\": \"George Harrison\",\n            \"funcao\": \"guitarrista\"\n        },\n        {\n            \"nome\": \"Paul McCartney\",\n            \"funcao\": \"baixista e vocalista\"\n        },\n        {\n            \"nome\": \"John Lennon\",\n            \"funcao\": \"guitarrista e vocalista\"\n        }\n    ],\n    \"faixas\": [\n        {\n            \"numero\": 1,\n            \"titulo\": \"Come Together\",\n            \"duracaoSegundos\": 259\n        },\n        {\n            \"numero\": 2,\n            \"titulo\": \"Something\",\n            \"duracaoSegundos\": 182\n        }\n    ]\n}",
+          "raw": "{\n    \"id\": \"6a77bb2650a0c3ec96fcfc5f\",\n    \"titulo\": \"Abbey Road\",\n    \"anoLancamento\": 1969,\n    \"genero\": \"Classic Rock\",\n    \"artistas\": [\n        {\n            \"nome\": \"Ringo Star\",\n            \"funcao\": \"baterista\"\n        },\n        {\n            \"nome\": \"George Harrison\",\n            \"funcao\": \"guitarrista\"\n        },\n        {\n            \"nome\": \"Paul McCartney\",\n            \"funcao\": \"baixista e vocalista\"\n        },\n        {\n            \"nome\": \"John Lennon\",\n            \"funcao\": \"guitarrista e vocalista\"\n        }\n    ],\n    \"faixas\": [\n        {\n            \"numero\": 1,\n            \"titulo\": \"Come Together\",\n            \"duracaoSegundos\": 259\n        },\n        {\n            \"numero\": 2,\n            \"titulo\": \"Something\",\n            \"duracaoSegundos\": 182\n        }\n    ]\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -119,7 +146,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8082/api/v1/admin/albuns/6a2c1f2d239cfa7cdccbdc67",
+          "raw": "http://localhost:8082/api/v1/admin/albuns/6a77bb2650a0c3ec96fcfc5f",
           "protocol": "http",
           "host": [
             "localhost"
@@ -130,7 +157,7 @@
             "v1",
             "admin",
             "albuns",
-            "6a2c1f2d239cfa7cdccbdc67"
+            "6a77bb2650a0c3ec96fcfc5f"
           ]
         }
       },

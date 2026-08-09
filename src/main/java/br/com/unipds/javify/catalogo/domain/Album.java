@@ -5,7 +5,9 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
@@ -17,6 +19,7 @@ public record Album (
 
                      @NotNull(message = "O ano de lançamento é obrigatório.")
                      @Min(value = 1900, message = "O ano de lançamento deve ser maior que 1900.")
+                     @Field("ano_lancamento")
                      Integer anoLancamento,
 
                      @NotBlank(message = "O gênero musical é obrigatório.")

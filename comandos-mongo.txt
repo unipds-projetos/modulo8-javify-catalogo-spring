@@ -87,4 +87,7 @@ javify_db> db.albuns.find({ "artistas.nome": "Pink Floyd" });
   }
 ]
 
+javify_db> db.albuns.createIndex({"titulo": 1})
+titulo_1
+
 javify_db>
