@@ -660,3 +660,25 @@ javify_db> db.albuns.insertOne({
               { "_id": ObjectId("6a21fda5c386542b4fd1a811"), "numero": 17, "titulo": "Her Majesty", "duracaoSegundos": 23 }
             ]
            });
+
+javify_db> db.albuns.aggregate([
+ {
+     $match: {
+         genero: /rock/i
+     }
+ },
+ {
+     $unwind: "$faixas"
+ },
+ {
+     $group: {
+         _id: "Rock",
+         duracaoTotalSegundos: {
+             $sum: "$faixas.duracaoSegundos"
+         },
+         totalFaixas: {
+             $sum: 1
+         }
+     }
+ }
+ ]);
