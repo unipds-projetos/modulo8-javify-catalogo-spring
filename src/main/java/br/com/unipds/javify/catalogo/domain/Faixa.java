@@ -1,20 +1,22 @@
 package br.com.unipds.javify.catalogo.domain;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.annotation.Id;
 
-public record Faixa(
-        @NotNull(message = "O número da faixa é obrigatório.")
-        @Min(value = 1, message = "O número da faixa deve ser maior que zero.")
-        Integer numero,
+import java.util.List;
 
-        @NotBlank(message = "O título da faixa não pode estar em branco.")
-        String titulo,
+public record Faixa (
 
-        @NotNull(message = "A duração da faixa é obrigatória.")
-        @Min(value = 1, message = "A duração deve ter pelo menos 1 segundo.")
-        @Field("duracao_segundos")
-        Integer duracaoSegundos ) {}
-
+    @Id String id,
+    String titulo,
+    Integer duracaoSegundos,
+    String arquivoAudioUrl,
+    String isrc,
+    Long totalReproducoes,
+    Boolean conteudoExplicito,
+    String letraUrl,
+    Integer bpm,
+    Double energia,
+    Boolean instrumental,
+//    AlbumResumoFaixa album,
+    List<ArtistaParticipante> artistas
+) {}
