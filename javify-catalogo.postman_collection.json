@@ -162,6 +162,35 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Relatório Duração Gênero",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/v1/admin/relatorios/duracao-genero?genero=Rock",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "v1",
+            "admin",
+            "relatorios",
+            "duracao-genero"
+          ],
+          "query": [
+            {
+              "key": "genero",
+              "value": "Rock"
+            }
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
