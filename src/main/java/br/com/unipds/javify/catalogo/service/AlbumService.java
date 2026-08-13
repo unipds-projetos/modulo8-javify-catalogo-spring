@@ -5,7 +5,10 @@ import br.com.unipds.javify.catalogo.exception.AlbumNaoEncontradoException;
 import br.com.unipds.javify.catalogo.repository.AlbumRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,15 +36,21 @@ public class AlbumService {
         return albumRepository.findByTituloContainingIgnoreCase(titulo, pageable);
     }
 
+    @Cacheable(value="album", key = "#id")
     public Album buscarPorId(String id) {
         return albumRepository.findById(id)
                 .orElseThrow(() -> new AlbumNaoEncontradoException(id));
     }
 
+    @CacheEvict(value = "albuns", allEntries = true)
     public Album salvarNovoAlbum(Album novoAlbum) {
         return albumRepository.save(novoAlbum);
     }
 
+    @Caching(
+            put = @CachePut(value = "album", key="#id"),
+            evict = @CacheEvict(value = "albuns", allEntries = true)
+    )
     public Album atualizarAlbum(String id, Album albumAtualizado) {
         buscarPorId(id);
         if (!id.equals(albumAtualizado.id())) {
@@ -50,6 +59,12 @@ public class AlbumService {
         return albumRepository.save(albumAtualizado);
     }
 
+    @Caching(
+            evict = {
+                    @CacheEvict(value = "albuns", allEntries = true),
+                    @CacheEvict(value = "album", key = "#id")
+            }
+    )
     public void excluirAlbum(String id) {
         if (!albumRepository.existsById(id)) {
             throw new AlbumNaoEncontradoException(id);
