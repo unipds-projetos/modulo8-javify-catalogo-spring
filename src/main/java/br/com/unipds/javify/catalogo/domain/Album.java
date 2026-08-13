@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Document(collection = "albuns")
@@ -26,6 +27,6 @@ public record Album (
                      List<ArtistaParticipante> artistas,
 
                      @Valid
-                     List<FaixaResumoAlbum> faixas) {
+                     List<FaixaResumoAlbum> faixas) implements Serializable {
 
 }

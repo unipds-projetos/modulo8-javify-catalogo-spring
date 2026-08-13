@@ -3,6 +3,9 @@ package br.com.unipds.javify.catalogo.service;
 import br.com.unipds.javify.catalogo.domain.Album;
 import br.com.unipds.javify.catalogo.exception.AlbumNaoEncontradoException;
 import br.com.unipds.javify.catalogo.repository.AlbumRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,13 +15,17 @@ import java.util.List;
 @Service
 public class AlbumService {
 
+    private static final Logger log = LoggerFactory.getLogger(AlbumService.class);
+
     private final AlbumRepository albumRepository;
 
     public AlbumService(AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
     }
 
+    @Cacheable(value = "albuns", key = "#pageable.pageNumber + '-' +  #pageable.pageSize")
     public Page<Album> listarTodos(Pageable pageable) {
+        log.info("Chamando AlbumService.listarTodos");
         return albumRepository.findAll(pageable);
     }
 
